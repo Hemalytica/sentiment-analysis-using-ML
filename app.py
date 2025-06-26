@@ -135,17 +135,17 @@ def main():
     if st.checkbox("Show Word Cloud"):
         st.write("### Word Cloud of Reviews")
         wc = generate_wordcloud(data, theme)
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(5, 3))
         ax.imshow(wc, interpolation='bilinear')
         ax.axis("off")
         st.pyplot(fig)
-
+    
     # Confusion Matrix
     if st.checkbox("Show Confusion Matrix"):
         st.write("### Confusion Matrix")
         cm = confusion_matrix(y_test, predictions)
         labels = sorted(data['Sentiment'].unique())
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(5, 3))
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
         plt.xlabel("Predicted")
         plt.ylabel("Actual")
@@ -167,7 +167,7 @@ def main():
             st.dataframe(new_data)
             st.write("### Live Sentiment Distribution")
             sentiment_counts = new_data['Predicted_Sentiment'].value_counts()
-            fig, ax = plt.subplots()
+            fig, ax = plt.subplots(figsize=(5, 3))
             ax.pie(sentiment_counts, labels=sentiment_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('pastel'))
             ax.axis("equal")
             st.pyplot(fig)
